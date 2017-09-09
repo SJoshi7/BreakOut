@@ -4,6 +4,7 @@ var mainState = {
 // Here we preload the assets 
 
  game.load.image('paddle', 'assets/paddle.png');   
+ game.load.image('brick', 'assets/brick.png');
 
 }, 
 	create: function() { 
@@ -21,7 +22,21 @@ var mainState = {
 	// Add the paddle at the bottom of the screen 
 	this.paddle = game.add.sprite(200, 400, 'paddle'); 
 	// Make sure the paddle won't move when it hits the ball 
-	this.paddle.body.immovable = true; },  
+	this.paddle.body.immovable = true; 
+
+	 // Create a group that will contain all the bricks 
+	 this.bricks = game.add.group(); 
+	 // Add 25 bricks to the group (5 columns and 5 lines) 
+	 for (var i = 0; i < 5; i++){
+	  for (var j = 0; j < 5; j++) {
+	   // Create the brick at the correct position 
+	   var brick = game.add.sprite(55+i*60, 55+j*35, 'brick'); 
+	   // Make sure the brick won't move when the ball hits it 
+	   brick.body.immovable = true; 
+	   // Add the brick to the group 
+	   this.bricks.add(brick); } } 
+
+
 }, 
 	update: function() {
  // Here we update the game 60 times per second 
