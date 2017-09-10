@@ -44,11 +44,20 @@ var mainState = {
 	   this.ball.body.velocity.y = 200; 
 	   // Make sure the ball will bounce when hitting something 
 	   this.ball.body.bounce.setTo(1); 
-	   this.ball.body.collideWorldBounds = true; 
+	   this.ball.body.collideWorldBounds = true; }
 
 
 }, 
 	update: function() {
+
+	// Add collisions between the paddle and the ball 
+	game.physics.arcade.collide(this.paddle, this.ball); 
+	// Call the 'hit' function when the ball hits a brick 
+	game.physics.arcade.collide(this.ball, this.bricks, this.hit, null, this); 
+	// Restart the game if the ball is below the paddle 
+	if (this.ball.y > this.paddle.y) game.state.start('main'); }, 
+	// New function that removes a brick from the game 
+	hit: function(ball, brick) { brick.kill(); },
  // Here we update the game 60 times per second 
 
 // Move the paddle left/right when an arrow key is pressed
