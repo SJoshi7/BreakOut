@@ -5,6 +5,7 @@ var mainState = {
 
  game.load.image('paddle', 'assets/paddle.png');   
  game.load.image('brick', 'assets/brick.png');
+ game.load.image('ball', 'assets/ball.png');
 
 }, 
 	create: function() { 
@@ -35,6 +36,15 @@ var mainState = {
 	   brick.body.immovable = true; 
 	   // Add the brick to the group 
 	   this.bricks.add(brick); } } 
+
+	   // Add the ball 
+	   this.ball = game.add.sprite(200, 300, 'ball'); 
+	   // Give the ball some initial speed 
+	   this.ball.body.velocity.x = 200; 
+	   this.ball.body.velocity.y = 200; 
+	   // Make sure the ball will bounce when hitting something 
+	   this.ball.body.bounce.setTo(1); 
+	   this.ball.body.collideWorldBounds = true; 
 
 
 }, 
